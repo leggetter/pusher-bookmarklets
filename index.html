@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bookmarklets</title>
+  <meta name="description" content="Bookmarklets">
+  <meta name="author" content="Phil Leggetter">
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+	<a href="javascript:(function(){function%20loadScript(url,callback){var%20done=false;var%20script=document.createElement(%22script%22);script.src=url;script.onload=script.onreadystatechange=function(){if(!done%20%26%26(!this.readyState%20||%20this.readyState==%22loaded%22%20||%20this.readyState==%22complete%22)){done=true;if(callback){callback();}}};document.getElementsByTagName(%22head%22)[0].appendChild(script);}var%20url=prompt(%22URL%20of%20script%3F%22);loadScript(url);})();">loadScript</a>
+</body>
+</html>

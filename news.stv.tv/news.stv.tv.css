@@ -1,0 +1,22 @@
+.news-update-notification {
+	background-color: yellow;
+
+	font-size: 13px;
+	color: black;
+
+	text-align: center;
+
+	padding: 4px;
+
+	cursor: pointer;
+}
+
+.news-update-notification .pending-count {
+	background-color: red;
+	color: white;
+	margin-right: 10px;
+
+	text-align: center;
+	padding: 2px;
+	line-height: 100%;
+}
