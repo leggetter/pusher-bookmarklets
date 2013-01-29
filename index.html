@@ -10,6 +10,38 @@
   <![endif]-->
 </head>
 <body>
-	<a href="javascript:(function(){function%20loadScript(url,callback){var%20done=false;var%20script=document.createElement(%22script%22);script.src=url;script.onload=script.onreadystatechange=function(){if(!done%20%26%26(!this.readyState%20||%20this.readyState==%22loaded%22%20||%20this.readyState==%22complete%22)){done=true;if(callback){callback();}}};document.getElementsByTagName(%22head%22)[0].appendChild(script);}var%20url=prompt(%22URL%20of%20script%3F%22);loadScript(url);})();">loadScript</a>
+	<p>Drag the link to your bookmarks bar to make it a bookmarklet.</p>
+
+	<ul id="bookmarklets">
+	</ul>
+
+	<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+	<script>
+		var scripts = [
+			{ name: 'loadScript', url: 'loadScript.js' },
+			{ name: 'realtime news.stv.tv', url: 'news.stv.tv/news.stv.tv.js' }
+		];
+
+		$( function() {
+			$.each( scripts, getScript );
+		} );
+
+		function getScript( index, script ) {
+			$.ajax( {
+					url: script.url,
+					dataType: 'text',
+					success: function( data ) {
+						scriptLoaded( script, data );
+					}
+			} );
+		}
+
+		function scriptLoaded( script, data ) {
+			var encoded = encodeURIComponent( data );
+			var href = "javascript:" + encoded;
+			var html = '<li><a href="' + href + '">' + script.name + '</a></li>';
+			$( '#bookmarklets' ).append( html );
+		}
+	</script>
 </body>
 </html>

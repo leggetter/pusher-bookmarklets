@@ -1,15 +1,15 @@
 ( function() {
 
-	var pusher;
-	var newsChannel;
-	var pendingUpdates = [];
 	Pusher.log = log;
 
+	// store pending updates to be shown
+	var pendingUpdates = [];
+
 	// connect to Pusher
-	pusher = new Pusher( 'ea27905cc22a754790ff', { encrypted: true } );
+	var pusher = new Pusher( 'ea27905cc22a754790ff', { encrypted: true } );
 
 	// subscribe to the channel that news events will be received on
-	newsChannel = pusher.subscribe( 'stv-news' );
+	var newsChannel = pusher.subscribe( 'stv-news' );
 
 	// bind to event triggered when news is published
 	newsChannel.bind( 'new-content', newContent );
@@ -18,9 +18,6 @@
 	function newContent( data ) {
 		pendingUpdates.push( data );
 		var pendingCount = pendingUpdates.length;
-
-		log( 'new-content. pending count: ' + pendingCount );
-
 		var el = getNotificationEl();
 		el.find( '.pending-count' ).text( pendingCount );
 		el.find( '.pending-text' ).text( 'New update' + ( pendingCount > 1? 's' : '' ) );
